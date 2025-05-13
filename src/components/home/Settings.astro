@@ -1,0 +1,29 @@
+---
+import SettingsMenu from "./SettingsMenu";
+---
+
+<div
+  class="offcanvas offcanvas-start sidecanvas"
+  tabindex="-1"
+  id="offcanvasExample"
+  aria-labelledby="offcanvasExampleLabel"
+>
+  <div class="offcanvas-header offcanvas-header-border">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Settings</h5>
+
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+      title="Close"
+    >
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body">
+    <!-- Render the React component containing the menu items -->
+    <!-- client:visible ensures it loads only when offcanvas might become visible -->
+    <SettingsMenu client:visible />
+  </div>
+</div>

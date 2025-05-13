@@ -1,0 +1,28 @@
+---
+import LoginForm from "../components/auth/LoginForm";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <div class="site_content">
+    <!-- ======================All Page Loader========================= -->
+    <div class="loader-wrapper loader">
+      <div class="icon-loader">
+        <img src="assets/images/pan.gif" alt="pan" />
+      </div>
+    </div>
+    <!-- ======================All Page Loader End========================= -->
+    <!-- ====================== Header ========================= -->
+    <section class="container">
+      <div class="lets-screen-main section-main">
+        <img
+          class="lets-screen-logo"
+          src="assets/images/logo/logo-new.png"
+          alt="Logo"
+        />
+        <h1 class="lets-you-text">Sign In</h1>
+        <LoginForm client:load />
+      </div>
+    </section>
+  </div>
+</Layout>

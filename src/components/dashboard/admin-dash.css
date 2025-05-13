@@ -1,0 +1,232 @@
+.dashboard-container {
+  padding: 16px;
+  font-family: sans-serif;
+}
+
+.dashboard-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.dashboard-loading,
+.dashboard-empty {
+  color: #777;
+  font-size: 16px;
+}
+
+.delivery-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 100px;
+}
+
+.delivery-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ccc;
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.delivery-customer {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.delivery-address {
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.delivery-status {
+  font-size: 14px;
+}
+
+.delivery-status.in-transit {
+  color: #007bff;
+}
+
+.delivery-status.pending {
+  color: #888;
+}
+
+.delivery-view-button {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.delivery-view-button:hover {
+  background-color: #0056b3;
+}
+
+.delivery-detail-container {
+  padding: 20px;
+  background-color: #fff;
+  margin: 20px auto;
+  border-radius: 10px;
+  max-width: 500px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.delivery-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.delivery-info p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+.delivery-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.delivery-button {
+  flex: 1;
+  padding: 10px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+}
+
+.upload-btn {
+  background-color: #f59e0b;
+  color: #fff;
+}
+
+.upload-btn:hover {
+  background-color: #d97706;
+}
+
+.finish-btn {
+  background-color: #10b981;
+  color: white;
+}
+
+.finish-btn:hover {
+  background-color: #059669;
+}
+
+.delivery-loading,
+.delivery-error {
+  text-align: center;
+  margin: 20px;
+  font-size: 16px;
+  color: #6b7280;
+}
+
+.delivery-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.delivery-button {
+  padding: 10px 14px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #2e7d32;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.delivery-button.upload {
+  background-color: #0288d1;
+}
+
+.delivery-button.finish {
+  background-color: #f57c00;
+}
+
+.delivery-button:hover {
+  opacity: 0.9;
+}
+
+.upload-container {
+  padding: 16px;
+  text-align: center;
+}
+.upload-title {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+.upload-video {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 12px;
+  border: 2px solid #ccc;
+}
+.upload-button {
+  margin-top: 12px;
+  padding: 10px 20px;
+  font-weight: bold;
+  background-color: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.upload-button:hover {
+  background-color: #1d4ed8;
+}
+
+.delivery-upload-button {
+  padding: 8px 14px;
+  margin-top: 10px;
+  background-color: #10b981;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.delivery-upload-button:hover {
+  background-color: #059669;
+}
+
+.camera-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+}
+
+.video-preview {
+  width: 100%;
+  max-width: 380px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+button.capture-btn {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+button.capture-btn:hover {
+  background-color: #1e40af;
+}

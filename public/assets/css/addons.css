@@ -1,0 +1,936 @@
+/* Add to src/styles/global.css or a new addons.css file */
+
+/* Section container */
+.trending-meals-main {
+  margin-top: 2rem; /* Adjust as needed */
+  margin-bottom: 2rem; /* Only if showAll is false */
+}
+
+/* Section Header */
+.offers-main {
+  display: flex;
+  align-items: center; /* Use standard align-items */
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.offers-main h2 {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 600; /* font-semibold */
+  color: #1f2937; /* text-gray-800 */
+}
+.offers-main .view-all-link {
+  /* Custom class for the link */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  color: #ea580c; /* text-orange-600 */
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.offers-main .view-all-link:hover {
+  color: #c2410c; /* text-orange-700 */
+}
+.offers-main .view-all-arrow {
+  width: 1rem; /* w-4 */
+  height: 1rem; /* h-4 */
+  margin-left: 0.25rem; /* ml-1 */
+}
+
+/* Horizontal Scroll Container (Home Page) */
+.addons-scroll-container {
+  display: flex;
+  overflow-x: auto;
+  padding-bottom: 1rem; /* Space for scrollbar */
+  gap: 1rem; /* Space between cards */
+  /* Optional: Hide scrollbar visually */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.addons-scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+/* Add sentinel for spacing at the end of scroll */
+.addons-scroll-container .scroll-spacer {
+  flex-shrink: 0;
+  width: 1px;
+}
+
+/* Grid Container (All Addons Page) */
+.addons-grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns base */
+  gap: 1rem; /* Space between cards */
+}
+/* Responsive grid columns */
+@media (min-width: 640px) {
+  /* sm breakpoint */
+  .addons-grid-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 768px) {
+  /* md breakpoint */
+  .addons-grid-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  /* lg breakpoint */
+  .addons-grid-container {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* Individual Addon Card Wrapper (matches template class) */
+.trending-meals-contain-main {
+  background-color: white;
+  border-radius: 0.5rem; /* rounded-lg */
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); /* shadow-md */
+  overflow: hidden;
+  border: 1px solid #e5e7eb; /* border-gray-200 */
+  /* Only apply width/shrink for scroll container */
+}
+.addons-scroll-container .trending-meals-contain-main {
+  flex-shrink: 0;
+  width: 12rem; /* w-48 */
+}
+
+/* Image Container (matches template class) */
+.trending-meals {
+  position: relative; /* For potential future overlays */
+  height: 9rem; /* h-36 - ADJUST THIS VALUE TO CONTROL IMAGE HEIGHT */
+  background-color: #f3f4f6; /* bg-gray-100 fallback */
+}
+
+/* Addon Image (adapts template class) */
+.addon-image {
+  /* New specific class */
+  display: block; /* Remove extra space below image */
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Crop image to fit container */
+}
+
+/* Card Content Area */
+.addon-details {
+  padding: 0.75rem; /* p-3 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 110px; /* Adjust based on content + button */
+}
+
+/* Addon Name (matches template class) */
+.Jakila {
+  /* Apply directly to addon name h3 */
+  font-weight: 600; /* font-semibold */
+  font-size: 0.875rem; /* text-sm */
+  color: #1f2937; /* text-gray-800 */
+  margin-bottom: 0.25rem; /* mb-1 */
+  /* Ellipsis for long names */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Addon Price */
+.addon-price {
+  /* New specific class */
+  font-weight: bold;
+  font-size: 1rem; /* text-md */
+  margin-bottom: 0.5rem; /* mb-2 */
+  color: #d97706; /* Specific color */
+}
+
+/* Order Button */
+.addon-order-button {
+  /* New specific class */
+  width: 100%;
+  background-color: #ffc107; /* Specific color */
+  color: #1f2937; /* Dark text for contrast */
+  font-size: 0.75rem; /* text-xs */
+  font-weight: 700; /* font-bold */
+  padding: 0.375rem 0.5rem; /* py-1.5 px-2 */
+  border: none;
+  border-radius: 0.25rem; /* rounded */
+  cursor: pointer;
+  margin-top: 0.25rem; /* mt-1 */
+  transition: opacity 0.15s ease-in-out;
+}
+.addon-order-button:hover {
+  opacity: 0.9;
+}
+.addon-order-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Align helper classes if not globally defined (Bootstrap/Tailwind usually provide these) */
+.d-flex {
+  display: flex;
+}
+.align-items-center {
+  align-items: center;
+}
+.justify-content-between {
+  justify-content: space-between;
+}
+.text-center {
+  text-align: center;
+}
+.py-5 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+.text-gray-500 {
+  color: #6b7280;
+}
+.text-red-600 {
+  color: #dc2626;
+}
+
+/* Ensure container exists for grid layout (if not using Tailwind container) */
+/* .container { max-width: 1280px; margin-left: auto; margin-right: auto; padding: 0 1rem; } */
+
+/* Styles for CheckoutDisplay.tsx - Add to global.css or checkout.css */
+
+.checkout-container {
+  background-color: white;
+  padding: 1.5rem; /* p-6 */
+  border-radius: 0.375rem; /* rounded */
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-lg */
+  max-width: 600px; /* Optional: Limit width */
+  margin: 0 auto; /* Center if max-width is set */
+}
+
+.checkout-item-details {
+  display: flex;
+  flex-direction: column; /* Stack name and single price */
+  align-items: flex-start;
+  overflow: hidden; /* Prevent long names overflowing */
+}
+
+.checkout-title {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 600; /* font-semibold */
+  margin-bottom: 1rem; /* mb-4 */
+  border-bottom: 1px solid #e5e7eb; /* border-b border-gray-200 */
+  padding-bottom: 0.75rem; /* pb-3 */
+  color: #1f2937; /* text-gray-800 */
+}
+
+.checkout-item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0; /* mb-6 */
+}
+
+.checkout-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0; /* py-3 */
+  border-bottom: 1px solid #e5e7eb;
+  gap: 0.5rem;
+}
+.checkout-item:last-child {
+  border-bottom: none; /* Remove border for the last item */
+}
+
+.checkout-item-info {
+  display: flex;
+  align-items: center;
+  flex-grow: 1; /* Allow info section to grow */
+  margin-right: 1rem; /* mr-4 */
+}
+
+.checkout-item-image {
+  width: 3rem; /* w-12 */
+  height: 3rem; /* h-12 */
+  object-fit: cover;
+  border-radius: 0.25rem; /* rounded */
+  margin-right: 0.75rem; /* mr-3 */
+  border: 1px solid #e5e7eb; /* border */
+  flex-shrink: 0; /* Prevent image shrinking */
+}
+
+.checkout-item-name {
+  color: #1f2937; /* text-gray-800 */
+  font-size: 0.875rem; /* text-sm */
+  /* Allow name to wrap if needed */
+}
+@media (min-width: 640px) {
+  /* sm breakpoint */
+  .checkout-item-name {
+    font-size: 1rem;
+  } /* text-base */
+}
+
+.checkout-item-price {
+  font-weight: 500; /* font-medium */
+  color: #111827; /* text-gray-900 */
+  font-size: 0.875rem; /* text-sm */
+  flex-shrink: 0; /* Prevent price shrinking */
+}
+@media (min-width: 640px) {
+  /* sm breakpoint */
+  .checkout-item-price {
+    font-size: 1rem;
+  } /* text-base */
+}
+
+.checkout-total-section {
+  border-top: 1px solid #e5e7eb; /* border-t border-gray-200 */
+  padding-top: 1rem; /* pt-4 */
+}
+
+.checkout-total-row {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600; /* font-semibold */
+  font-size: 1.125rem; /* text-lg */
+  color: #111827; /* text-gray-900 */
+}
+
+.checkout-actions {
+  margin-top: 2rem; /* mt-8 */
+  text-align: center;
+}
+
+.checkout-proceed-button {
+  background-color: #ffc107; /* bg-green-600 */
+  color: white;
+  font-weight: 700; /* font-bold */
+  padding: 0.75rem 2rem; /* py-3 px-8 */
+  border: none;
+  border-radius: 0.375rem; /* rounded */
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+  width: 100%; /* w-full */
+}
+@media (min-width: 640px) {
+  /* sm breakpoint */
+  .checkout-proceed-button {
+    width: auto;
+  } /* sm:w-auto */
+}
+
+.checkout-proceed-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Empty Cart Styles */
+.checkout-empty-cart {
+  text-align: center;
+  padding: 2.5rem 1.5rem; /* py-10 p-6 */
+  background-color: white;
+  border-radius: 0.25rem; /* rounded */
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); /* shadow */
+}
+.checkout-empty-message {
+  color: #4b5563; /* text-gray-600 */
+  margin-bottom: 1rem; /* mb-4 */
+}
+.checkout-browse-link {
+  color: #ea580c; /* text-orange-600 */
+  font-weight: 500; /* font-medium */
+  text-decoration: none;
+}
+.checkout-browse-link:hover {
+  color: #c2410c; /* hover:text-orange-700 */
+}
+
+.checkout-item-price-single {
+  font-size: 0.8em;
+  color: #6b7280; /* text-gray-500 */
+}
+
+.checkout-item-controls {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0; /* Prevent controls from shrinking */
+  margin-left: 1rem; /* Space between item info and controls */
+}
+
+.quantity-modifier {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d1d5db; /* border-gray-300 */
+  border-radius: 0.25rem; /* rounded */
+  margin-right: 1rem; /* Space before total price */
+}
+
+.quantity-button {
+  background-color: #f3f4f6; /* bg-gray-100 */
+  border: none;
+  color: #374151; /* text-gray-700 */
+  padding: 0.25rem 0.6rem; /* Adjust padding */
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+}
+.quantity-button:hover {
+  background-color: #e5e7eb; /* bg-gray-200 */
+}
+.quantity-button:first-child {
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+  border-right: 1px solid #d1d5db;
+}
+.quantity-button:last-child {
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  border-left: 1px solid #d1d5db;
+}
+
+.quantity-display {
+  padding: 0.25rem 0.75rem; /* Horizontal padding */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  min-width: 30px; /* Ensure some space for the number */
+  text-align: center;
+}
+
+.checkout-item-price-total {
+  font-weight: 600; /* font-semibold */
+  color: #111827; /* text-gray-900 */
+  font-size: 0.875rem; /* text-sm */
+  min-width: 70px; /* Adjust as needed */
+  text-align: right;
+  margin-right: 1rem; /* Space before remove button */
+}
+@media (min-width: 640px) {
+  /* sm breakpoint */
+  .checkout-item-price-total {
+    font-size: 1rem;
+  } /* text-base */
+}
+
+.remove-button {
+  background: none;
+  border: none;
+  color: #ef4444; /* text-red-500 */
+  font-size: 1.5rem; /* Larger 'X' */
+  line-height: 1;
+  padding: 0 0.25rem;
+  cursor: pointer;
+  margin-left: auto; /* Push remove button to the far right if needed */
+}
+.remove-button:hover {
+  color: #dc2626; /* text-red-600 */
+}
+
+.checkout-summary-section {
+  margin-top: 2rem; /* mt-8 */
+  padding-top: 1.5rem; /* pt-6 */
+  border-top: 1px solid #e5e7eb; /* border-t border-gray-200 */
+}
+
+.summary-title {
+  font-size: 1.125rem; /* text-lg */
+  font-weight: 600; /* font-semibold */
+  margin-bottom: 1rem; /* mb-4 */
+  color: #1f2937; /* text-gray-800 */
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Align top for lists */
+  margin-bottom: 0.5rem; /* mb-2 */
+  font-size: 0.875rem; /* text-sm */
+}
+
+.summary-label {
+  color: #4b5563; /* text-gray-600 */
+  margin-right: 0.5rem;
+  flex-shrink: 0; /* Prevent label from shrinking */
+}
+
+.summary-value {
+  color: #111827; /* text-gray-900 */
+  font-weight: 500; /* font-medium */
+  text-align: right;
+}
+
+.summary-addons-section .summary-value {
+  width: 100%; /* Allow list to take space */
+}
+
+.summary-addon-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%; /* Take full width */
+}
+
+.summary-addon-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem; /* Slightly smaller */
+  color: #374151; /* text-gray-700 */
+  margin-bottom: 0.25rem;
+  padding-left: 1rem; /* Indent addon items */
+}
+.summary-addon-item span:first-child {
+  margin-right: 0.5rem;
+}
+
+.summary-total {
+  margin-top: 0.75rem; /* mt-3 */
+  padding-top: 0.75rem; /* pt-3 */
+  border-top: 1px dashed #d1d5db; /* dashed border */
+  font-weight: 600; /* font-semibold */
+}
+.summary-total .summary-label {
+  font-weight: 600;
+}
+.summary-total .summary-value {
+  font-weight: 700; /* font-bold */
+  color: #1f2937;
+}
+
+.order-selection-container {
+  background-color: #ffffff;
+  padding: 1rem 1.5rem 1.5rem 1.5rem; /* p-6ish */
+  border-radius: 8px; /* softer rounding */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 4px 8px rgba(0, 0, 0, 0.05); /* subtle shadow */
+  max-width: 700px;
+  margin: 1.5rem auto;
+}
+
+.selection-title {
+  font-size: 1.375rem; /* slightly larger */
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+  text-align: center; /* Center title */
+}
+.selection-instructions {
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin-bottom: 1.75rem; /* More space below */
+  text-align: center; /* Center instructions */
+}
+
+.order-list {
+  margin-bottom: 2rem;
+  /* Remove default list styling if it's a ul/ol */
+  list-style: none;
+  padding: 0;
+}
+
+/* Card styling for each order item */
+.order-item {
+  display: flex;
+  align-items: flex-start; /* Align items to top */
+  background-color: #ffffff; /* Keep white or use subtle off-white */
+  padding: 1rem 1.25rem; /* More padding */
+  border: 1px solid #e5e7eb;
+  border-radius: 6px; /* Slightly less rounded */
+  margin-bottom: 1rem; /* More space between cards */
+  cursor: pointer;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+.order-item:hover {
+  border-color: #9ca3af; /* Darker border on hover */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Styling when selected */
+.order-item:has(input[type="radio"]:checked) {
+  border-color: #f97316; /* Keep orange border */
+  box-shadow: 0 0 0 1px #f97316; /* Use subtle ring instead of thicker shadow */
+  background-color: #fff7ed;
+}
+
+.order-radio {
+  margin-right: 1rem; /* More space next to radio */
+  margin-top: 0.25rem; /* Align better with first line of text */
+  width: 1.1rem; /* Slightly larger radio */
+  height: 1.1rem;
+  accent-color: #f97316;
+  flex-shrink: 0; /* Prevent radio from shrinking */
+}
+
+.order-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem; /* Slightly more space between text lines */
+  flex-grow: 1; /* Allow details to take available space */
+}
+
+.order-identifier {
+  font-weight: 600; /* Bolder */
+  color: #111827;
+  font-size: 1rem; /* Slightly larger */
+  line-height: 1.4;
+}
+.order-package {
+  font-size: 0.9rem;
+  color: #374151;
+  line-height: 1.4;
+}
+.order-delivery-date {
+  /* Renamed for clarity from previous CSS */
+  font-size: 0.85rem;
+  color: #6b7280;
+  line-height: 1.4;
+}
+.order-status {
+  font-size: 0.8rem;
+  color: #059669; /* Green for active */
+  font-style: italic;
+  margin-top: 0.1rem;
+  line-height: 1.4;
+  /* Add specific styles for other statuses if needed */
+}
+.order-status.status-cancelled,
+.order-status.status-expired {
+  color: #dc2626; /* Red */
+}
+
+/* Button section - center the button */
+.date-selection-section {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+  text-align: center; /* Center button and prompt */
+}
+
+.date-title {
+  /* If you keep this title */
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Button Styling (reuse from previous step or refine) */
+.date-selection-button {
+  padding: 0.7rem 1.75rem; /* Larger padding */
+  background-color: #16a34a; /* Green */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+  font-size: 1rem; /* Larger text */
+}
+.date-selection-button:hover:not(:disabled) {
+  background-color: #15803d;
+}
+.date-selection-button:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.date-selection-prompt {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-top: 0.75rem; /* More space */
+}
+
+/* Loading / Error / No Items messages */
+.loading-message,
+.error-message,
+.no-subscription-message {
+  /* Update class if you renamed it */
+  text-align: center;
+  padding: 2.5rem 1rem;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  color: #4b5563;
+  margin: 2rem 0;
+}
+.error-message {
+  color: #dc2626;
+  background-color: #fee2e2;
+  border-color: #fecaca;
+}
+.no-subscription-message h2 {
+  /* Update class if you renamed it */
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+}
+
+/* Add to global.css or stripe.css */
+
+/* Basic Styling for Stripe Checkout Form */
+.stripe-checkout-form {
+  width: 100%;
+  min-width: 300px;
+  max-width: 500px; /* Limit form width */
+  margin: 1.5rem auto; /* Center form */
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background-color: #f9fafb;
+}
+
+#payment-element {
+  margin-bottom: 1.5rem; /* Space below payment fields */
+}
+
+.stripe-submit-button {
+  background-color: #16a34a; /* Green */
+  font-family: inherit;
+  color: #ffffff;
+  border-radius: 4px;
+  border: 0;
+  padding: 12px 16px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: block;
+  transition: background-color 0.2s ease;
+  width: 100%;
+  margin-top: 1rem; /* Space above button */
+}
+.stripe-submit-button:hover:not(:disabled) {
+  background-color: #15803d;
+}
+.stripe-submit-button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.stripe-payment-message {
+  color: rgb(105, 115, 134);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  padding-top: 12px;
+  text-align: center;
+}
+.stripe-payment-message a {
+  color: #f97316; /* Orange */
+  text-decoration: underline;
+}
+/* Style error messages specifically */
+.stripe-payment-message:not(:empty)::before {
+  /* Add symbol for errors? */
+  content: "⚠️ ";
+}
+
+.stripe-cancel-button {
+  display: block;
+  margin: 1rem auto 0 auto;
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-size: 0.875rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.stripe-cancel-button:hover {
+  color: #1f2937;
+}
+
+/* Styling for Status Display Page */
+.status-display-container {
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.status-message {
+  font-size: 1.125rem;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+.status-message.status-success {
+  color: #15803d; /* Dark Green */
+}
+.status-message.status-error {
+  color: #b91c1c; /* Dark Red */
+}
+
+.status-link {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background-color: #f97316;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: background-color 0.15s ease;
+}
+.status-link:hover {
+  background-color: #ea580c;
+}
+.status-link.status-link-error {
+  background-color: #6b7280; /* Gray */
+}
+.status-link.status-link-error:hover {
+  background-color: #4b5563;
+}
+
+/* Add/Ensure these styles are in global.css or similar */
+
+/* Page Container (centers the card) */
+.auth-page-container {
+  max-width: 450px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Form Card Wrapper */
+.auth-form-card {
+  background-color: #fff;
+  padding: 2rem 1.5rem; /* Padding inside the card */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo */
+.auth-logo {
+  display: block;
+  max-width: 150px;
+  margin: 0 auto 1.5rem auto;
+}
+
+/* Title */
+.auth-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+}
+
+/* Subtitle / Instructions */
+.auth-subtitle {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin-bottom: 2rem; /* More space before form */
+}
+
+/* Form Item Wrapper (Label + Input) */
+.form-item {
+  margin-bottom: 1.25rem; /* Space below each form item */
+}
+
+/* Form Label */
+.form-label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* Form Input Field */
+.form-input {
+  display: block;
+  width: 100%;
+  padding: 0.7rem 0.75rem; /* Increased padding */
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #1f2937;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #d1d5db; /* Gray border */
+  appearance: none; /* Remove default styling */
+  border-radius: 6px; /* Slightly more rounded */
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.form-input:focus {
+  border-color: #f97316; /* Orange focus border */
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.25); /* Orange focus ring */
+}
+.form-input::placeholder {
+  color: #9ca3af; /* Lighter placeholder text */
+  opacity: 1;
+}
+.form-input:disabled {
+  background-color: #f3f4f6; /* Lighter bg when disabled */
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Password Hint Text */
+.password-hint {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+/* Form Actions Wrapper (Submit Button) */
+.form-actions {
+  margin-top: 2rem; /* More space above button */
+}
+
+/* Submit Button */
+.submit-button {
+  display: flex; /* Use flex for centering spinner */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 1rem; /* Button padding */
+  background-color: #f97316; /* Orange */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+  line-height: 1.5; /* Ensure text is centered vertically */
+}
+.submit-button:hover:not(:disabled) {
+  background-color: #ea580c; /* Darker orange */
+}
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Basic Spinner for Button */
+.spinner {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  border: 0.15em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spinner-border 0.75s linear infinite;
+  margin-right: 0.5rem; /* Space between spinner and text */
+}
+@keyframes spinner-border {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Error/Success Message Styling */
+.form-message {
+  margin-top: 1.5rem; /* Space above message */
+  margin-bottom: 1rem; /* Space below message */
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-align: center;
+  border: 1px solid transparent;
+}
+.form-message.error {
+  color: #991b1b; /* Darker red text */
+  background-color: #fee2e2; /* Light red bg */
+  border-color: #fecaca; /* Red border */
+}
+.form-message.success {
+  color: #166534; /* Darker green text */
+  background-color: #dcfce7; /* Light green bg */
+  border-color: #bbf7d0; /* Green border */
+}

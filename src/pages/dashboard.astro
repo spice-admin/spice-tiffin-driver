@@ -1,0 +1,43 @@
+---
+// src/pages/home.astro
+import Layout from "../layouts/Layout.astro"; // Assuming this is your base HTML/Head layout
+import Header from "../components/home/Header.astro"; // Your home page header
+
+import Settings from "../components/home/Settings.astro";
+import BottomMenu from "../components/home/BottomMenu.astro";
+
+import DriverDashboard from "../components/dashboard/DriverDashboard";
+---
+
+<Layout title="Home">
+  {/* Use the base Layout */}
+  <div class="site_content">
+    {
+      /* Loader can be removed if splash screen handles it, or kept if desired */
+    }
+    <div class="loader-wrapper loader">
+      <div class="icon-loader">
+        <img src="/assets/images/pan.gif" alt="Loading..." />
+        {/* Ensure path is relative to public */}
+      </div>
+    </div>
+
+    <section class="container">
+      {/* Page Header */}
+      <Header />
+
+      {/* --- CHANGE: Add padding-bottom to this main content wrapper --- */}
+      {
+        /* Adjust pb-24 (96px) or pb-28 (112px) as needed based on navbar height */
+      }
+      <div class="section-main pb-24 md:pb-28">
+        {/* Added padding bottom */}
+        <DriverDashboard client:load />
+        {/* Bottom Navigation Bar */}
+        <BottomMenu />
+      </div>
+
+      <Settings />
+    </section>
+  </div>
+</Layout>
