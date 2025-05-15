@@ -1,0 +1,51 @@
+---
+// src/pages/driver/task/[assignmentId]/capture-proof.astro
+export const prerender = false;
+import MainLayout from "../../../../layouts/Layout.astro"; // Adjust path to your main layout
+import ProofOfDeliveryUploader from "../../../../components/driver/ProofOfDeliveryUploader.tsx"; // We will create this React component next
+
+// Get the assignmentId from the URL path parameter
+const { assignmentId } = Astro.params;
+
+if (!assignmentId) {
+  // Handle case where assignmentId is missing, perhaps redirect or show error
+  // For now, we'll let the React component handle it if it receives undefined
+  console.error("capture-proof.astro: assignmentId is missing from params.");
+}
+---
+
+<MainLayout title="Capture Proof of Delivery">
+  <div class="page-container">
+    <h1>Proof of Delivery</h1>
+    {
+      assignmentId ? (
+        <ProofOfDeliveryUploader assignmentId={assignmentId} client:load />
+      ) : (
+        <p class="error-message">
+          No delivery assignment ID provided. Please go back and select a task.
+        </p>
+      )
+    }
+  </div>
+</MainLayout>
+
+<style>
+  .page-container {
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  .page-container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+  }
+  .error-message {
+    color: red;
+    text-align: center;
+    font-weight: bold;
+  }
+</style>

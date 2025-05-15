@@ -1,11 +1,12 @@
 // src/components/driver/DriverDashboard.tsx
 import React, { useEffect, useState, useCallback } from "react";
 import { supabase } from "../../lib/supabaseClient"; // Adjust path to your Supabase client
+
 import { format } from "date-fns";
-import { parseISO } from "date-fns";
 // If you created src/types/driverApp.types.ts, import from there:
 // import type { OptimizedStopData, DriverDeliveryTask } from '../../types/delivery.types';
 import "./admin-dash.css";
+import { parseISO } from "date-fns/parseISO";
 
 // If defining types locally for now:
 interface OptimizedStopData {
@@ -17,11 +18,10 @@ interface OptimizedStopData {
   package_name: string | null;
   user_phone?: string | null;
   delivery_city?: string | null;
-  // Add any other fields you denormalized into optimized_order_sequence
 }
 
 interface DriverDeliveryTask extends OptimizedStopData {
-  delivery_status: string; // Current status from 'driver_assignments'
+  delivery_status: string;
 }
 // End local type definitions
 
@@ -201,40 +201,34 @@ const DriverDashboard: React.FC = () => {
     }
   };
 
+  const handleFinishDelivery = (dailyAssignmentId: string) => {
+    console.log(
+      `DriverDashboard: "Finish" clicked for assignment ID: ${dailyAssignmentId}`
+    );
+
+    const targetPath = `/driver/task/${dailyAssignmentId}/capture-proof`;
+    window.location.href = targetPath; // Standard browser navigation for MPA
+  };
+
   const handleUpdateStatus = async (
     dailyAssignmentId: string,
     newStatus: "Delivered" | "Failed"
   ) => {
     if (!driverId) return;
-
     console.log(
-      `DriverDashboard: Attempting to update assignment ${dailyAssignmentId} to ${newStatus}`
+      `DriverDashboard (or ProofScreen): Updating assignment ${dailyAssignmentId} to ${newStatus}`
     );
-    // Optimistically update UI or show loading on the specific item
-    // For now, let's do a general loading state.
     setLoading(true);
     try {
       const { data, error: updateError } = await supabase
         .from("driver_assignments")
-        .update({
-          status: newStatus,
-          updated_at: new Date().toISOString(),
-        })
+        .update({ status: newStatus, updated_at: new Date().toISOString() })
         .eq("id", dailyAssignmentId)
-        .eq("driver_id", driverId) // Ensure driver can only update their own assignments
-        .select() // Select to confirm update and get the updated row
+        .eq("driver_id", driverId)
+        .select()
         .single();
-
-      if (updateError) {
-        console.error(
-          "DriverDashboard: Error updating delivery status:",
-          updateError
-        );
-        throw updateError;
-      }
-
+      if (updateError) throw updateError;
       if (data) {
-        // Update local state to reflect change immediately
         setDeliveries((prevDeliveries) =>
           prevDeliveries.map((d) =>
             d.id === dailyAssignmentId
@@ -242,14 +236,14 @@ const DriverDashboard: React.FC = () => {
               : d
           )
         );
-        alert(`Delivery marked as ${newStatus}!`);
+        // This alert will likely be on the Proof of Delivery screen after successful update
+        // alert(`Delivery marked as ${newStatus}!`);
       } else {
         throw new Error("Failed to confirm status update from server.");
       }
     } catch (err: any) {
-      console.error("DriverDashboard: Failed to update status:", err);
+      console.error("Failed to update status:", err);
       alert(`Error updating status: ${err.message}. Please try again.`);
-      // Optionally revert optimistic UI update here if you implemented one
     } finally {
       setLoading(false);
     }
@@ -285,7 +279,7 @@ const DriverDashboard: React.FC = () => {
         <div className="delivery-list">
           {deliveries.map((delivery, index) => (
             <div
-              key={delivery.id /* daily_assignment_id */}
+              key={delivery.id}
               className={`delivery-card status-${delivery.delivery_status
                 .toLowerCase()
                 .replace(/[^a-z0-9]+/g, "-")}`}
@@ -333,33 +327,25 @@ const DriverDashboard: React.FC = () => {
                   View on Google Maps
                 </button>
 
-                {delivery.delivery_status === "Pending" ||
-                delivery.delivery_status === "Out for Delivery" ? (
-                  <>
-                    <button
-                      onClick={() =>
-                        handleUpdateStatus(delivery.id, "Delivered")
-                      }
-                      className="delivery-action-button button-delivered"
-                      disabled={loading} // Disable if any global loading is true
-                    >
-                      Mark Delivered
-                    </button>
-                    <button
-                      onClick={() => handleUpdateStatus(delivery.id, "Failed")}
-                      className="delivery-action-button button-failed" // You'll need CSS for .button-failed
-                      disabled={loading}
-                    >
-                      Mark Failed
-                    </button>
-                  </>
-                ) : delivery.delivery_status === "Delivered" ? (
+                {(delivery.delivery_status === "Pending" ||
+                  delivery.delivery_status === "Out for Delivery" ||
+                  delivery.delivery_status === "Assigned") && ( // Added 'Assigned'
+                  <button
+                    onClick={() => handleFinishDelivery(delivery.id)}
+                    className="delivery-action-button button-finish"
+                    disabled={loading}
+                  >
+                    Finish {/* Changed text */}
+                  </button>
+                )}
+                {delivery.delivery_status === "Delivered" && (
                   <span className="status-finalized-text">Completed</span>
-                ) : delivery.delivery_status === "Failed" ? (
+                )}
+                {delivery.delivery_status === "Failed" && (
                   <span className="status-finalized-text error-text">
                     Delivery Failed
                   </span>
-                ) : null}
+                )}
               </div>
             </div>
           ))}
