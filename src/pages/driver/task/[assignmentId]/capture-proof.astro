@@ -2,7 +2,11 @@
 // src/pages/driver/task/[assignmentId]/capture-proof.astro
 export const prerender = false;
 import MainLayout from "../../../../layouts/Layout.astro"; // Adjust path to your main layout
-import ProofOfDeliveryUploader from "../../../../components/driver/ProofOfDeliveryUploader.tsx"; // We will create this React component next
+import ProofOfDeliveryUploader from "../../../../components/driver/ProofOfDeliveryUploader.tsx";
+import Header from "../../../../components/home/Header.astro"; // Your home page header
+
+import Settings from "../../../../components/home/Settings.astro";
+import BottomMenu from "../../../../components/home/BottomMenu.astro";
 
 // Get the assignmentId from the URL path parameter
 const { assignmentId } = Astro.params;
@@ -15,37 +19,40 @@ if (!assignmentId) {
 ---
 
 <MainLayout title="Capture Proof of Delivery">
-  <div class="page-container">
-    <h1>Proof of Delivery</h1>
+  <div class="site_content">
     {
-      assignmentId ? (
-        <ProofOfDeliveryUploader assignmentId={assignmentId} client:load />
-      ) : (
-        <p class="error-message">
-          No delivery assignment ID provided. Please go back and select a task.
-        </p>
-      )
+      /* Loader can be removed if splash screen handles it, or kept if desired */
     }
+    <div class="loader-wrapper loader">
+      <div class="icon-loader">
+        <img src="/assets/images/pan.gif" alt="Loading..." />
+        {/* Ensure path is relative to public */}
+      </div>
+    </div>
+
+    <section class="container">
+      {/* Page Header */}
+      <Header />
+
+      {/* --- CHANGE: Add padding-bottom to this main content wrapper --- */}
+      {
+        /* Adjust pb-24 (96px) or pb-28 (112px) as needed based on navbar height */
+      }
+      <div class="section-main pb-24 md:pb-28">
+        {
+          assignmentId ? (
+            <ProofOfDeliveryUploader assignmentId={assignmentId} client:load />
+          ) : (
+            <p class="error-message">
+              No delivery assignment ID provided. Please go back and select a
+              task.
+            </p>
+          )
+        }
+        <BottomMenu />
+      </div>
+
+      <Settings />
+    </section>
   </div>
 </MainLayout>
-
-<style>
-  .page-container {
-    max-width: 700px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  .page-container h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 25px;
-  }
-  .error-message {
-    color: red;
-    text-align: center;
-    font-weight: bold;
-  }
-</style>
